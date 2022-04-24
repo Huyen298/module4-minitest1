@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Find Book</h2>
+<input type="text" placeholder="Book name">
+<input type="submit" value="search">
+<br>
+<h1>List book</h1>
+<p>
+    <a href="/book/create">Create new book</a>
+</p>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Author</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Action</th>
+    </tr>
+    <th:block th:each="books : ${book}">
+        <tr>
+            <td th:text="${books.id}"></td>
+            <td th:text="${books.author}"></td>
+            <td th:text="${books.name}"></td>
+            <td th:text="${books.price}"></td>
+            <td th:text="${books.category.name}"></td>
+            <td>
+                <a href="book/edit">Edit</a>
+                <a href="book/delete">Delete</a>
+            </td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>
