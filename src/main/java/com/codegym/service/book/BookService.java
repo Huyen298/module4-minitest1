@@ -2,7 +2,6 @@ package com.codegym.service.book;
 
 import com.codegym.model.Book;
 import com.codegym.repository.IBookRepository;
-import com.codegym.service.book.IBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +29,11 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public void remote(Long id) {
+    public void remove(Long id) {
         bookRepository.deleteById(id);
+    }
+
+    public Iterable<Book> findBook(String name){
+        return bookRepository.findBookByName(name);
     }
 }

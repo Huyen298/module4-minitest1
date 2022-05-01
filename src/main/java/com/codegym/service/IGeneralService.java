@@ -11,5 +11,5 @@ public interface IGeneralService <T>{
 
     void save(T t);
 
-    void remote(Long id);
+    void remove(Long id);
 }

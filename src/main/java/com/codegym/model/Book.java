@@ -23,12 +23,12 @@ public class Book {
         this.author = author;
     }
 
-//    public Book(Long id, String name, Long price, String author) {
-//        this.id = id;
-//        this.name = name;
-//        this.price = price;
-//        this.author = author;
-//    }
+    public Book(Long id, String name, Long price, String author) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.author = author;
+    }
 
     public Book(String name, Long price, String author, Category category) {
         this.name = name;
@@ -75,5 +75,16 @@ public class Book {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", author='" + author + '\'' +
+                ", category=" + category +
+                '}';
     }
 }

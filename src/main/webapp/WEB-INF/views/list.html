@@ -29,10 +29,10 @@
             <td th:text="${books.name}"></td>
             <td th:text="${books.price}"></td>
             <td th:text="${books.category.name}"></td>
-            <td>
-                <a href="book/edit">Edit</a>
-                <a href="book/delete">Delete</a>
-            </td>
+
+            <td><a th:href="@{/book/edit/__${books.id}__}">Edit</a></td>
+            <td><a th:href="@{/book/delete/__${books.id}__}">Delete</a></td>
+
         </tr>
     </th:block>
 </table>

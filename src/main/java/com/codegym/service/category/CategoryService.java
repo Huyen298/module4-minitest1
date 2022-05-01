@@ -29,7 +29,7 @@ public class CategoryService implements ICategoryService{
     }
 
     @Override
-    public void remote(Long id) {
+    public void remove(Long id) {
         categoryRepository.deleteById(id);
     }
 }

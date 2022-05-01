@@ -5,36 +5,37 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Are you want to delete</h1>
+<h1>Are you want to delete?</h1>
+<p>
+    <a href="/book">Back to list</a>
+</p>
+<form th:object="${book}"   th:action="@{/delete}" method="post">
+    <input name="id" th:field="*{id}" th:type="hidden">
 
-<form th:object="book" >
+<table>
 
-    <label>Author</label>
-    <label th:text="${book.author}"></label>
-
-<!--<table>-->
-<!--    <tr>-->
-<!--        <td>Author</td>-->
-<!--        <td><input th:text="${book.author}"></td>-->
-<!--    </tr>-->
-<!--    <tr>-->
-<!--        <td>Name</td>-->
-<!--        <td><input th:text="${book.name}"></td>-->
-<!--    </tr>-->
-<!--    <tr>-->
-<!--        <td>Price</td>-->
-<!--        <td><input th:text="${book.price}"></td>-->
-<!--    </tr>-->
-<!--    <tr>-->
-<!--        <td>Category</td>-->
-<!--        <td><input th:text="${book.category.name}"></td>-->
-<!--    </tr>-->
-<!--    <tr>-->
-<!--        <td>-->
-<!--            <input type="submit" value="delete">-->
-<!--        </td>-->
-<!--    </tr>-->
-<!--</table>-->
+    <tr>
+        <td>Author:</td>
+        <td input th:text="${book.author}"></td>
+    </tr>
+    <tr>
+        <td >Name:</td>
+        <td input th:text="${book.name}"> </td>
+    </tr>
+    <tr>
+        <td>Price:</td>
+        <td input th:text="${book.price}"></td>
+    </tr>
+    <tr>
+        <td>Category:</td>
+        <td input th:text="${book.category.name}"></td>
+    </tr>
+    <tr>
+        <td>
+            <input type="submit" value="delete">
+        </td>
+    </tr>
+</table>
 </form>
 </body>
 </html>
