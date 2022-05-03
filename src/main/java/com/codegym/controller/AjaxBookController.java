@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/books")
 public class AjaxBookController {
@@ -17,12 +19,15 @@ public class AjaxBookController {
     @Autowired
     private IBookService bookService;
 
-    @GetMapping
-    public ResponseEntity<Iterable<Book>> findAll(){
-        return new ResponseEntity<>(bookService.findAll(), HttpStatus.OK);
+    @Autowired
+    private ICategoryService categoryService;
+
+    @ModelAttribute("categories")
+    public Iterable<Category> categories(){
+        return categoryService.findAll();
     }
 
-    @PostMapping
+    @PostMapping("")
     public ResponseEntity<Book> create(@RequestBody Book book){
         bookService.save(book);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -30,8 +35,8 @@ public class AjaxBookController {
 
     @GetMapping("/list")
     public ModelAndView showList(){
-        ModelAndView modelAndView = new ModelAndView("listbook");
-        modelAndView.addObject("books", bookService.findAll());
+        ModelAndView modelAndView = new ModelAndView("book/listBook");
+        modelAndView.addObject("book", bookService.findAll());
         return modelAndView;
     }
 
@@ -39,5 +44,15 @@ public class AjaxBookController {
     public ResponseEntity<Iterable<Book>> getAll(){
         Iterable<Book> books = bookService.findAll();
         return new ResponseEntity<>(books, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Book> deleteBook(@PathVariable Long id) {
+        Optional<Book> bookOptional = bookService.findById(id);
+        if (!bookOptional.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        bookService.remove(id);
+        return new ResponseEntity<>(bookOptional.get(), HttpStatus.NO_CONTENT);
     }
 }
