@@ -55,4 +55,21 @@ public class AjaxBookController {
         bookService.remove(id);
         return new ResponseEntity<>(bookOptional.get(), HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Book> findBookById(@PathVariable Long id){
+        return new ResponseEntity<>(bookService.findById(id).get(),HttpStatus.OK);
+    }
+
+    @PutMapping ("/{id}")
+    public ResponseEntity<Book> editBook(@PathVariable Long id,@RequestBody Book book){
+        Optional<Book> bookOptional = bookService.findById(id);
+        book.setId(bookOptional.get().getId());
+        if (!bookOptional.isPresent()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        bookService.save(book);
+        return new ResponseEntity<>(bookOptional.get(),HttpStatus.OK);
+    }
+
 }
